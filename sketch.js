@@ -82,16 +82,6 @@ function draw() {
    
     noStroke(); fill(0, 0, 255);
     text('youre on camera', 20, 20);
-    /*
-      VIDA has two built-in versions of the function drawing active zones:
-        [your vida object].drawActiveZones(x, y);
-      and
-        [your vida object].drawActiveZones(x, y, w, h);
-      But we want to create our own drawing function, which at the same time
-      will be used for the current handling of zones and reading their statuses
-      (we must also remember about controlling the sound).
-    */
-
     push(); // store current drawing style and font
     translate(offset_x, offset_y); // translate coords
     // set text style and font

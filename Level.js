@@ -8,6 +8,7 @@ class Level {
         this.numZones = hOffsets.length;
         this.zones = Array.from({length: this.numZones});
         this.sounds = Array.from({length: this.numZones});
+        this.envs = Array.from({length: this.numZones});
         this.normYValues = normYValues;
         this.addZones();
 
@@ -106,9 +107,8 @@ class Level {
           ' status: ' + zone.isMovementDetectedFlag
         );
         //... and use this information to control the sound.
-        this.sounds[i].amp(
-          0.1 * zone.isMovementDetectedFlag
-        );
+        // const newAmp = this.sounds[i].amp
+        // this.sounds[i].amp(newAmp);
       }
     }
 
@@ -129,8 +129,8 @@ class Level {
     */
     let osc = new p5.Oscillator();
     osc.setType('sine');
-
     osc.freq(440.0 * Math.pow(2.0, (60 + (i * 4) - 69.0) / 12.0));
+    this.envs[i] = new p5.Envelope(0.01, 0.7, 0.3, 0.0)
     /*
     Let's assume that each subsequent oscillator will play 4 halftones higher
     than the previous one (from the musical point of view, it does not make
@@ -152,8 +152,13 @@ class Level {
     createZone(index){
       this.sounds[index] = this.createSound(index);
 
-      myVida.addActiveZone(index, hOffset + this.hOffsets[index] * finalPadding, this.normYValues[index], zoneWidth, zoneHeight);
+      myVida.addActiveZone(index, hOffset + this.hOffsets[index] * finalPadding, this.normYValues[index], zoneWidth, zoneHeight, () => this.playSound(this.sounds[index], index));
         
+    }
+
+    playSound(sound, i){
+      sound.start();
+      this.envs[i].play(sound);
     }
 
 }

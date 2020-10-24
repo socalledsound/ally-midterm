@@ -62,6 +62,7 @@ function setup() {
 }
 
 function draw() {
+  myVida.setActiveZonesNormFillThreshold(0.000001);
   if(myCapture !== null && myCapture !== undefined) { // safety first
     background(0, 0, 255);
     /*
@@ -69,7 +70,9 @@ function draw() {
       parameter. Usually this function is called in the draw loop (once per
       repetition).
     */
+  //  myVida.setActiveZonesNormFillThreshold(0.99999);
     myVida.update(myCapture);
+
     // console.log(myVida.activeZones)
 
 
@@ -172,7 +175,7 @@ function initVida(){
    must be exceeded to trigger the zone (so, higher the parameter value =
    lower the zone sensitivity).
  */
- myVida.setActiveZonesNormFillThreshold(0.1);
+ myVida.setActiveZonesNormFillThreshold(0.0);
  /*
    Let's create several active zones. VIDA uses normalized (in the range from
    0.0 to 1.0) instead of pixel-based. Thanks to this, the position and size

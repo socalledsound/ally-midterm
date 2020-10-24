@@ -151,7 +151,7 @@ class Level {
 
     createZone(index){
       this.sounds[index] = this.createSound(index);
-
+      myVida.setActiveZonesNormFillThreshold(0.000001);
       myVida.addActiveZone(index, hOffset + this.hOffsets[index] * finalPadding, this.normYValues[index], zoneWidth, zoneHeight, () => this.playSound(this.sounds[index], index));
         
     }
